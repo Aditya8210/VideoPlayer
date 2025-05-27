@@ -39,7 +39,9 @@ fun HomeScreenUi(){
     val pagerState = rememberPagerState(pageCount = {tabs.size})
     val scope = rememberCoroutineScope()
 
-   TabRow(selectedTabIndex = pagerState.currentPage, modifier = Modifier.fillMaxWidth()) {
+
+
+    Column {  TabRow(selectedTabIndex = pagerState.currentPage, modifier = Modifier.fillMaxWidth()) {
 
        tabs.forEachIndexed { index, tabItem ->
            Tab(
@@ -61,11 +63,14 @@ fun HomeScreenUi(){
        }
 
    }
+
     HorizontalPager(state = pagerState) {
         when (it){
             0 -> FolderScreenUi()
             1 -> VideoScreenUi()
         }
+    }
+
     }
 
 }
