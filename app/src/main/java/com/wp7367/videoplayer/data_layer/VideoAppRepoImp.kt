@@ -4,7 +4,9 @@ import android.app.Application
 import android.provider.MediaStore
 import com.wp7367.videoplayer.domain_layer.VideoAppRepo
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
+import java.io.File
 
 class VideoAppRepoImp: VideoAppRepo {
     override suspend fun getAllVideos(application: Application): Flow<List<VideoFile>> {
@@ -52,6 +54,10 @@ class VideoAppRepoImp: VideoAppRepo {
     }
 
     override suspend fun getVideoByFolder(application: Application): Flow<Map<String, List<VideoFile>>> {
-        TODO("Not yet implemented")
+        val allVideos = getAllVideos(application).first()
+        val videoByFolder = allVideos.groupBy {
+            File(it.path).parentFile.name ?: "unknown"
+        }
+        return flow { emit(videoByFolder) }
     }
 }

@@ -13,8 +13,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.wp7367.videoplayer.ui.theme.VideoPlayerTheme
+import com.wp7367.videoplayer.ui_layer.navigation.AppNavigation
 import com.wp7367.videoplayer.ui_layer.screen.HomeScreenUi
+import dagger.hilt.android.AndroidEntryPoint
 
+ @AndroidEntryPoint
  class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +27,7 @@ import com.wp7367.videoplayer.ui_layer.screen.HomeScreenUi
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Box(modifier = Modifier.padding(innerPadding)) {
 
-                        HomeScreenUi()
+                        AppNavigation()
                     }
                 }
             }

@@ -17,11 +17,13 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun HomeScreenUi(){
+fun HomeScreenUi(navController: NavHostController){
 
 
     val tabs = listOf(
@@ -66,7 +68,7 @@ fun HomeScreenUi(){
     HorizontalPager(state = pagerState) {
         when (it){
             0 -> FolderScreenUi()
-            1 -> VideoScreenUi()
+            1 -> VideoScreenUi(navController = navController)
         }
     }
 
