@@ -67,7 +67,7 @@ fun HomeScreenUi(navController: NavHostController){
 
     HorizontalPager(state = pagerState) {
         when (it){
-            0 -> FolderScreenUi()
+            0 -> FolderScreenUi(navController = navController)
             1 -> VideoScreenUi(navController = navController)
         }
     }

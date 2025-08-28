@@ -7,7 +7,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.wp7367.videoplayer.ui_layer.screen.ExoPlayerScreenUi
+import com.wp7367.videoplayer.ui_layer.screen.FolderScreenUi
 import com.wp7367.videoplayer.ui_layer.screen.HomeScreenUi
+import com.wp7367.videoplayer.ui_layer.screen.VideosInFolderScreen // Import the new screen
 
 @Composable
 fun  AppNavigation (modifier: Modifier = Modifier){
@@ -18,11 +20,18 @@ val navController = rememberNavController()
         composable<HomeScreen>{
             HomeScreenUi(navController)
         }
+        composable<FolderScreen>{
+            FolderScreenUi(navController = navController)
+        }
 
         composable<PlayerScreen>{
-            val videoUri: PlayerScreen = it.toRoute<PlayerScreen>()
-            ExoPlayerScreenUi(videoUri = videoUri.videoUri)
+            val args: PlayerScreen = it.toRoute<PlayerScreen>()
+            ExoPlayerScreenUi(videoUri = args.videoUri)
 
+        }
+        composable<VideosInFolderScreen>{
+            val args: VideosInFolderScreen = it.toRoute<VideosInFolderScreen>()
+            VideosInFolderScreen(navController = navController, folderName = args.folderName)
         }
     }
 }
